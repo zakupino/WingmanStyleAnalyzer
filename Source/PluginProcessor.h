@@ -36,6 +36,28 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    // Pitch & Chord Analysis Engine
+    float getDetectedPitch() const { return detectedPitchHz; }
+    juce::String getDetectedNoteName() const { return currentNoteName; }
+
 private:
+    static constexpr auto fftOrder = 10;
+    static constexpr auto fftSize  = 1 << fftOrder;
+    
+    juce::dsp::FFT forwardFFT;
+    juce::dsp::WindowingFunction<float> window;
+
+    float fifo [fftSize];
+    float fftData [2 * fftSize];
+    int fifoIndex = 0;
+    bool nextFFTBlockReady = false;
+
+    float detectedPitchHz = 0.0f;
+    juce::String currentNoteName = "C";
+
+    void pushNextSampleIntoFifo (float sample);
+    void analyzeAudioBlock();
+    juce::String convertHzToNote (float frequency);
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WingmanStyleAnalyzerAudioProcessor)
 };
