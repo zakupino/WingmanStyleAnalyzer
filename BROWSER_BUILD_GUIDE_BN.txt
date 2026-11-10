@@ -1,0 +1,23 @@
+শুধু Browser দিয়ে Windows VST3 build করার পদ্ধতি
+================================================
+
+এই প্রজেক্টে GitHub Actions workflow যোগ করা হয়েছে। GitHub-এর Windows runner
+ক্লাউডে build করবে; আপনার PC-তে Visual Studio/CMake install করতে হবে না।
+
+1. https://github.com এ account খুলুন বা sign in করুন।
+2. New repository তৈরি করুন; নাম দিন WingmanStyleAnalyzer এবং Public/Private
+   যেকোনোটি বেছে নিন।
+3. repository-এর ভিতরে Add file > Upload files নির্বাচন করুন।
+4. ZIP extract করে পাওয়া সব ফাইল/ফোল্ডার upload করুন। .github ফোল্ডারটিও
+   upload হয়েছে কি না নিশ্চিত করুন।
+5. Commit changes চাপুন।
+6. repository-এর Actions tab খুলুন। "Build Windows VST3" workflow চালু/দেখুন।
+   প্রথমবার workflow enable করতে চাইলে Enable workflow চাপুন।
+7. Build শেষ হলে সবুজ Success দেখাবে। workflow run খুলে Artifacts থেকে
+   WingmanStyleAnalyzer-Windows.zip download করুন।
+
+সতর্কতা:
+- Build সফল হওয়া নিশ্চিত নয়; compile error হলে Actions-এর log দেখে code ঠিক করতে হবে।
+- এই prototype Wingman 3-এর পূর্ণ বিকল্প নয়।
+- Plugin-টি VST3-compatible DAW-তে audio input-এ route করতে হবে।
+- VST3 plugin-এর extension .vst3; .dll সাধারণত VST2 plugin।
