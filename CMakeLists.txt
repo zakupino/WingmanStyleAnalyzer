@@ -27,7 +27,7 @@ juce_add_plugin(WingmanStyleAnalyzer
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
     COPY_PLUGIN_AFTER_BUILD FALSE
 )
-
+juce_generate_juce_header(WingmanStyleAnalyzer)
 target_sources(WingmanStyleAnalyzer PRIVATE
     Source/PluginProcessor.cpp
     Source/PluginProcessor.h
